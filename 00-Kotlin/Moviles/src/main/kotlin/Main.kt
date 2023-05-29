@@ -3,7 +3,6 @@ import java.util.*
 fun main(args: Array<String>) {
     println("Hello World!")
     // Tipos de variables
-
     // INMUTABLES (NO se reasignan "=")
     val inmutable: String = "Adrian";
     // inmutable = "Vicente";
@@ -11,6 +10,7 @@ fun main(args: Array<String>) {
     // Mutables (Re asignar)
     var mutable: String = "Vicente";
     mutable = "Adrian";
+
 
     //  val > var
 
@@ -47,6 +47,19 @@ fun main(args: Array<String>) {
     calcularSueldo(10.00, 12.00, 20.00)
     calcularSueldo(10.00, bonoEspecial = 20.00) // Named Parameters
     calcularSueldo(bonoEspecial = 20.00, sueldo = 10.00, tasa = 14.00) //  Parametros nombrados
+
+    val sumaUno = Suma(1,1)
+    val sumaDos = Suma(null, 1)
+    val sumaTres = Suma(1, null)
+    val sumaCuatro = Suma(null, null)
+    sumaUno.sumar()
+    sumaDos.sumar()
+    sumaTres.sumar()
+    sumaCuatro.sumar()
+    println(Suma.pi)
+    println(Suma.elevarAlCuadrado(2))
+    println(Suma.historialSumas)
+
 }
 
 // void -> Unit
@@ -100,6 +113,59 @@ abstract class Numeros( // Constructor PRIMARIO
     }
 }
 
+
+class Suma( // Constructor Primario Suma
+    uno: Int, // Parametro
+    dos: Int // Parametro
+) : Numeros(uno, dos) { // <- Constructor del Padre
+    init { // Bloque constructor primario
+        this.numeroUno; numeroUno;
+        this.numeroDos; numeroDos;
+    }
+
+    constructor(//  Segundo constructor
+        uno: Int?, // parametros
+        dos: Int // parametros
+    ) : this(  // llamada constructor primario
+        if (uno == null) 0 else uno,
+        dos
+    ) { // si necesitamos bloque de codigo lo usamos
+        numeroUno;
+    }
+
+    constructor(//  tercer constructor
+        uno: Int, // parametros
+        dos: Int? // parametros
+    ) : this(  // llamada constructor primario
+        uno,
+        if (dos == null) 0 else uno
+    ) // Si no lo necesitamos al bloque de codigo "{}" lo omitimos
+
+    constructor(//  cuarto constructor
+        uno: Int?, // parametros
+        dos: Int? // parametros
+    ) : this(  // llamada constructor primario
+        if (uno == null) 0 else uno,
+        if (dos == null) 0 else uno
+    )
+
+    public fun sumar(): Int { // public por defecto, o usar private o protected
+        val total = numeroUno + numeroDos
+        agregarHistorial(total)
+        return total
+    }
+    companion object { // Atributos y Metodos "Compartidos"
+        // entre las instancias
+        val pi = 3.14
+        fun elevarAlCuadrado(num: Int): Int {
+            return num * num
+        }
+        val historialSumas = arrayListOf<Int>()
+        fun agregarHistorial(valorNuevaSuma:Int){
+            historialSumas.add(valorNuevaSuma)
+        }
+    }
+}
 
 
 
