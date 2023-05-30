@@ -60,6 +60,24 @@ fun main(args: Array<String>) {
     println(Suma.elevarAlCuadrado(2))
     println(Suma.historialSumas)
 
+    // ARREGLOS
+
+    // Tipos de Arreglos
+
+    // Arreglo Estatico
+    val arregloEstatico: Array<Int> = arrayOf<Int>(1, 2, 3)
+    println(arregloEstatico)
+
+    // Arreglo Dinámicos
+    val arregloDinamico: ArrayList<Int> = arrayListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    println(arregloDinamico)
+    arregloDinamico.add(11)
+    arregloDinamico.add(12)
+    println(arregloDinamico)
+
+
+
+
 }
 
 // void -> Unit
