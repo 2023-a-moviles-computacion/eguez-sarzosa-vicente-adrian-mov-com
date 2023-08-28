@@ -76,7 +76,17 @@ class IFirestore : AppCompatActivity() {
             tarea = query!!.get()
         }
         if (tarea != null) {
-
+            tarea
+                .addOnSuccessListener { documentSnapshots ->
+                    guardarQuery(documentSnapshots, citiesRef)
+                    for (ciudad in documentSnapshots) {
+                        anadirAArregloCiudad(ciudad)
+                    }
+                    adaptador.notifyDataSetChanged()
+                }
+                .addOnFailureListener {
+                    // si hay fallos
+                }
         }
     }
 
@@ -100,7 +110,7 @@ class IFirestore : AppCompatActivity() {
             .collection("ejemplo")
 
         referenciaEjemploEstudiante
-            .document("123456789")
+            .document("12345678")
             .delete() // elimina
             .addOnCompleteListener { /* Si todo salio bien*/ }
             .addOnFailureListener { /* Si algo salio mal*/ }
@@ -248,6 +258,7 @@ class IFirestore : AppCompatActivity() {
                     ciudad.id
                     anadirAArregloCiudad(ciudad)
                 }
+                adaptador.notifyDataSetChanged()
             }
             .addOnFailureListener {
                 // Errores
